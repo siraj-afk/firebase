@@ -31,72 +31,74 @@ class _HomeState extends State<Home> {
         padding: EdgeInsets.only(top: 400.0.h),
         child: Padding(
           padding: EdgeInsets.only(left: 20.0),
-          child: Column(
-            children: [
-              Container(
-                width: 385.w,
-                height: 55.h,
-                decoration: ShapeDecoration(
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      width: 1,
-                      color: Colors.black.withOpacity(0.2199999988079071),
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-              ),
-              SizedBox(height: 50.h,),
-              Container(
-                width: 175.w,
-                height: 45.h,
-                decoration: ShapeDecoration(
-                  color: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: Center(
-                    child: Text(
-                  'push',
-                  style: TextStyle(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  width: 385.w,
+                  height: 55.h,
+                  decoration: ShapeDecoration(
                     color: Colors.white,
-                    fontSize: 14,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        width: 1,
+                        color: Colors.black.withOpacity(0.2199999988079071),
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
-                )),
-              ),
-              SizedBox(height: 50.h,),
-              Container(
-                width: 175.w,
-                height: 45.h,
-                decoration: ShapeDecoration(
-                  color: Colors.red,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                    ),
                   ),
                 ),
-                child: Center(
-                    child: Text(
-                      'push',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w700,
-                        height: 0,
-                      ),
-                    )),
-              ),
-            ],
+                SizedBox(height: 50.h,),
+                Container(
+                  width: 175.w,
+                  height: 45.h,
+                  decoration: ShapeDecoration(
+                    color: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Center(
+                      child: Text(
+                    'push',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w700,
+                      height: 0,
+                    ),
+                  )),
+                ),
+                SizedBox(height: 50.h,),
+                Container(
+                  width: 175.w,
+                  height: 45.h,
+                  decoration: ShapeDecoration(
+                    color: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Center(
+                      child: Text(
+                        'push',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w700,
+                          height: 0,
+                        ),
+                      )),
+                ),
+              ],
+            ),
           ),
         ),
       ),
