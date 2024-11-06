@@ -1,9 +1,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'Screen2.dart';
+import 'Screen3.dart';
 class Screen1 extends StatefulWidget {
   const Screen1({super.key});
 
@@ -49,24 +51,28 @@ class _Screen1State extends State<Screen1> {
               SizedBox(height: 60.h,),
               Row(mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 175.w,
-                    height: 45.h,
-                    decoration: ShapeDecoration(
-                      color: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  GestureDetector(onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Screen3()));
+                  },
+                    child: Container(
+                      width: 175.w,
+                      height: 45.h,
+                      decoration: ShapeDecoration(
+                        color: Colors.red,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+
                       ),
+                      child: Center(child: Text('Log In', style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w700,
+                        height: 0,
+                      ),)),
 
                     ),
-                    child: Center(child: Text('Log In', style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w700,
-                      height: 0,
-                    ),)),
-
                   ),
                   SizedBox(width: 20.w,),
                   GestureDetector(onTap: (){
