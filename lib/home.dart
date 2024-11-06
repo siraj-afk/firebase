@@ -53,31 +53,49 @@ class _HomeState extends State<Home> {
                 ),
               ),
               SizedBox(height: 50.h,),
-              GestureDetector(onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Homes()));
-              },
-                child: Container(
-                  width: 175.w,
-                  height: 45.h,
-                  decoration: ShapeDecoration(
-                    color: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+              Container(
+                width: 175.w,
+                height: 45.h,
+                decoration: ShapeDecoration(
+                  color: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Center(
-                      child: Text(
-                    'push',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w700,
-                      height: 0,
-                    ),
-                  )),
                 ),
-              )
+                child: Center(
+                    child: Text(
+                  'push',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w700,
+                    height: 0,
+                  ),
+                )),
+              ),
+              SizedBox(height: 50.h,),
+              Container(
+                width: 175.w,
+                height: 45.h,
+                decoration: ShapeDecoration(
+                  color: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Center(
+                    child: Text(
+                      'push',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w700,
+                        height: 0,
+                      ),
+                    )),
+              ),
             ],
           ),
         ),
