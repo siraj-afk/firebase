@@ -1,9 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled6/home.dart';
+import 'package:untitled6/phone.dart';
 import 'package:untitled6/toastmsg.dart';
+
+import 'forget.dart';
 class Screen3 extends StatefulWidget {
   const Screen3({super.key});
 
@@ -128,10 +132,27 @@ class _Screen3State extends State<Screen3> {
                 children: [
                   Image.asset('assets/google.png',width: 50.w,height: 50.h,),
                   SizedBox(width: 30.w,),
-                  Image.asset('assets/img.png',width: 50.w,height: 50.h,),
+                  GestureDetector(onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Phone()));
+                  },
+
+                      child: Image.asset('assets/img.png',width: 50.w,height: 50.h,)),
                 ],
               ),
-            )
+            ),
+            SizedBox(height: 30.h,),
+
+            Center(child: GestureDetector(onTap: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Forget()));
+            },
+              child: Text('forget password?',
+                style: TextStyle( color: Color(0xFF0DA54B),
+                fontSize: 14,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w400,
+                height: 0,
+              ),),
+            ))
 
           ],
         ),
