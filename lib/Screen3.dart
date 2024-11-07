@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled6/home.dart';
+import 'package:untitled6/toastmsg.dart';
 class Screen3 extends StatefulWidget {
   const Screen3({super.key});
 
@@ -10,6 +12,9 @@ class Screen3 extends StatefulWidget {
 }
 
 class _Screen3State extends State<Screen3> {
+  FirebaseAuth firebaseAuth=FirebaseAuth.instance;
+  TextEditingController email=TextEditingController();
+  TextEditingController password=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +61,7 @@ class _Screen3State extends State<Screen3> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: TextField(
+              child: TextField(controller: email,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'email',
@@ -77,7 +82,7 @@ class _Screen3State extends State<Screen3> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: TextField(
+              child: TextField(controller: password,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'Password',
@@ -86,7 +91,15 @@ class _Screen3State extends State<Screen3> {
             ),
             SizedBox(height: 30.h,),
             GestureDetector(onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Home()));
+              firebaseAuth
+                  .signInWithEmailAndPassword(
+                  email: email.text, password: password.text)
+                  .then((value) => {
+                ToastMessage().toastmessage(message: 'Successfully registerd'),
+                Navigator.of(context).push(MaterialPageRoute(builder: (_)=>Home()))
+              })
+                  .onError((error, stackTrace) => ToastMessage()
+                  .toastmessage(message: error.toString()));
             },
               child: Container(
                 width: 175.w,
