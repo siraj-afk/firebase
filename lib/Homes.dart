@@ -1,7 +1,9 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:untitled6/toastmsg.dart';
 
 class Homes extends StatefulWidget {
   const Homes({super.key});
@@ -54,8 +56,24 @@ class _HomesState extends State<Homes> {
                                 map.values.toList()[index]["title"].toString()),
                             trailing: Wrap(
                               children: [
-                                Icon(Icons.delete),
-                                Icon(Icons.edit),
+                                GestureDetector(onTap: (){
+                                  opendailoge(index: index, id: map.values.toList()[index]["id"].toString(), snapshot: snapshot);
+                                },
+                                    child: Icon(Icons.edit)),
+                                SizedBox(width: 10.w,),
+                                IconButton(
+                                    onPressed: () {
+                                      ref
+                                          .child(map.values
+                                          .toList()[index]["id"]
+                                          .toString())
+                                          .remove();
+                                    },
+                                    icon: Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ))
+
                               ],
                             ),
 
@@ -77,4 +95,75 @@ class _HomesState extends State<Homes> {
       ),
     );
   }
+  Future opendailoge(
+      {required int index,
+        required String id,
+        required AsyncSnapshot<DatabaseEvent> snapshot}) async {
+    final editpost = TextEditingController();
+
+    final ref = FirebaseDatabase.instance.ref("Data");
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Edit Here'),
+        content: TextFormField(
+          controller: editpost,
+          textInputAction: TextInputAction.next,
+          style: TextStyle(color: Colors.black),
+          decoration: InputDecoration(
+              filled: true,
+              errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey)),
+              fillColor: Color(0xFFF7F8F9),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey)),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8)),
+              hintText: 'Type here',
+              hintStyle:
+              TextStyle(color: Colors.grey, fontWeight: FontWeight.w300),
+              labelStyle: TextStyle (
+                color: Color(0xFF7C7C7C),
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                height: 0.10,
+              )),
+          validator: (email) {
+            if (email!.isEmpty) {
+              return 'Enter something';
+            }
+            return null;
+          },
+        ),
+        actions: [
+          ElevatedButton(
+              style: ButtonStyle(
+                 ),
+              onPressed: () {
+                ref
+                    .child(id)
+                    .update({'title': editpost.text.toString()})
+                    .then(
+                      (value) => {
+                    ToastMessage()
+                        .toastmessage(message: 'Edited Succesfull'),
+                    editpost.clear(),
+                    Navigator.pop(context),
+                  },
+                )
+                    .onError(
+                      (error, stackTrace) => ToastMessage()
+                      .toastmessage(message: error.toString()),
+                );
+              },
+              child: Text(
+                'Submit',
+                style: TextStyle(color: Colors.white),
+              ))
+        ],
+      ),
+    );
+  }
 }
+
