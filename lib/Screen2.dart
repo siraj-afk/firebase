@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:untitled6/home.dart';
+import 'package:untitled6/Realtime.dart';
 import 'package:untitled6/toastmsg.dart';
 
 class Screen2 extends StatefulWidget {

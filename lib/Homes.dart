@@ -52,31 +52,37 @@ class _HomesState extends State<Homes> {
                         itemCount: snapshot.data!.snapshot.children.length,
                         itemBuilder: (BuildContext context, int index) {
                           return ListTile(
-                            title:Text(
+                            title: Text(
                                 map.values.toList()[index]["title"].toString()),
                             trailing: Wrap(
                               children: [
-                                GestureDetector(onTap: (){
-                                  opendailoge(index: index, id: map.values.toList()[index]["id"].toString(), snapshot: snapshot);
-                                },
+                                GestureDetector(
+                                    onTap: () {
+                                      opendailoge(
+                                          index: index,
+                                          id: map.values
+                                              .toList()[index]["id"]
+                                              .toString(),
+                                          snapshot: snapshot);
+                                    },
                                     child: Icon(Icons.edit)),
-                                SizedBox(width: 10.w,),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
                                 IconButton(
                                     onPressed: () {
                                       ref
                                           .child(map.values
-                                          .toList()[index]["id"]
-                                          .toString())
+                                              .toList()[index]["id"]
+                                              .toString())
                                           .remove();
                                     },
                                     icon: Icon(
                                       Icons.delete,
                                       color: Colors.red,
                                     ))
-
                               ],
                             ),
-
                           );
                         },
                         separatorBuilder: (BuildContext context, int index) {
@@ -95,10 +101,11 @@ class _HomesState extends State<Homes> {
       ),
     );
   }
+
   Future opendailoge(
       {required int index,
-        required String id,
-        required AsyncSnapshot<DatabaseEvent> snapshot}) async {
+      required String id,
+      required AsyncSnapshot<DatabaseEvent> snapshot}) async {
     final editpost = TextEditingController();
 
     final ref = FirebaseDatabase.instance.ref("Data");
@@ -122,8 +129,8 @@ class _HomesState extends State<Homes> {
                   borderRadius: BorderRadius.circular(8)),
               hintText: 'Type here',
               hintStyle:
-              TextStyle(color: Colors.grey, fontWeight: FontWeight.w300),
-              labelStyle: TextStyle (
+                  TextStyle(color: Colors.grey, fontWeight: FontWeight.w300),
+              labelStyle: TextStyle(
                 color: Color(0xFF7C7C7C),
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -138,24 +145,23 @@ class _HomesState extends State<Homes> {
         ),
         actions: [
           ElevatedButton(
-              style: ButtonStyle(
-                 ),
+              style: ButtonStyle(),
               onPressed: () {
                 ref
                     .child(id)
                     .update({'title': editpost.text.toString()})
                     .then(
                       (value) => {
-                    ToastMessage()
-                        .toastmessage(message: 'Edited Succesfull'),
-                    editpost.clear(),
-                    Navigator.pop(context),
-                  },
-                )
+                        ToastMessage()
+                            .toastmessage(message: 'Edited Succesfull'),
+                        editpost.clear(),
+                        Navigator.pop(context),
+                      },
+                    )
                     .onError(
                       (error, stackTrace) => ToastMessage()
-                      .toastmessage(message: error.toString()),
-                );
+                          .toastmessage(message: error.toString()),
+                    );
               },
               child: Text(
                 'Submit',
@@ -166,4 +172,3 @@ class _HomesState extends State<Homes> {
     );
   }
 }
-

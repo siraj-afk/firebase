@@ -1,31 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:untitled6/toastmsg.dart';
 
-import 'Homes.dart';
-
-class Home extends StatefulWidget {
-  const Home({super.key});
+import 'Fshome2.dart';
+class Fshome extends StatefulWidget {
+  const Fshome({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Fshome> createState() => _FshomeState();
 }
 
-class _HomeState extends State<Home> {
+class _FshomeState extends State<Fshome> {
   final auth = FirebaseAuth.instance;
   final post = TextEditingController();
-  final database = FirebaseDatabase.instance.ref("Data");
-
+  final firestore = FirebaseFirestore.instance.collection('Data');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Center(child: Text('HOME')),
+        title: Center(child: Text('Fire Store')),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 20.0.w),
@@ -64,26 +61,25 @@ class _HomeState extends State<Home> {
                 SizedBox(
                   height: 50.h,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    final id = DateTime.now().microsecondsSinceEpoch.toString();
-                    database
-                        .child(id)
-                        .set({"id": id, "title": post.text.toString()})
-                        .then(
-                          (value) => {
-                            ToastMessage()
-                                .toastmessage(message: 'adding Succesfully'),
-                            post.clear(),
-                            Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => Homes()))
-                          },
-                        )
-                        .onError(
-                          (error, stackTrace) => ToastMessage()
-                              .toastmessage(message: error.toString()),
-                        );
-                  },
+                GestureDetector(onTap: (){
+                  final id = DateTime.now().microsecondsSinceEpoch.toString();
+                  firestore
+                      .doc(id)
+                      .set({"id": id, "title": post.text.toString()})
+                      .then(
+                        (value) => {
+                      ToastMessage()
+                          .toastmessage(message: 'adding Succesfully'),
+                      post.clear(),
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => Fshome2()))
+                    },
+                  )
+                      .onError(
+                        (error, stackTrace) => ToastMessage()
+                        .toastmessage(message: error.toString()),
+                  );
+                },
                   child: Container(
                     width: 175.w,
                     height: 45.h,
@@ -95,20 +91,21 @@ class _HomeState extends State<Home> {
                     ),
                     child: Center(
                         child: Text(
-                      'push',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w700,
-                        height: 0,
-                      ),
-                    )),
+                          'push',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w700,
+                            height: 0,
+                          ),
+                        )),
                   ),
                 ),
                 SizedBox(
                   height: 50.h,
                 ),
+
               ],
             ),
           ),
