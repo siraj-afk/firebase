@@ -55,7 +55,14 @@ class _Fshome2State extends State<Fshome2> {
 
                                 child: Icon(Icons.edit, color: Colors.white,)),
                             SizedBox(width: 10.w,),
-                            Icon(Icons.delete, color: Colors.white,)
+                            IconButton(
+                                onPressed: () {
+                                  ref.doc(snapshot.data!.docs[index]["id"].toString()).delete();
+                                },
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ))
                           ],
                         ),
                       );
